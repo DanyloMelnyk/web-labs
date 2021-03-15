@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+</head>
+<body>
+
+<header>
+    <h1>My wallet 1</h1>
+</header>
+
+<nav>
+    <a href="users.html">Users</a>
+    <a href="user.html">User page</a>
+    <a href="index.html">Wallets</a>
+
+    <a class="right" href="">Logout</a> <!-- FIXME -->
+    <a class="right" href="login.html">Login</a>
+    <a class="right" href="sign-up.html">Sign Up</a>
+</nav>
+
+<main>
+    <!-- Wallet page -->
+    <section class="card">
+        <div class="head">
+            <h2>My wallet 1</h2>
+            <div class="actions">
+                <a class="edit" href="edit-wallet.html"><i class="fas fa-edit"></i></a>
+                <a class="delete" href="/wallet/ID/delete"><i class="fas fa-trash"></i></a>
+                <a class="send" href="/wallet/ID/send"><i class="fas fa-share"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="field-label">Balance:</p>
+            <p class="field">100</p>
+        </div>
+        <div class="row">
+            <p class="field-label">Currency:</p>
+            <p class="field">UAH</p>
+        </div>
+    </section>
+    <!-- End wallet page -->
+</main>
+
+<aside>
+    <section class="card">
+        <div class="head">
+            <h2><a class="link" href="user.html">My profile</a></h2>
+        </div>
+
+        <div class="row">
+            <p class="field-label">First name:</p>
+            <p class="field">Danylo</p>
+        </div>
+        <div class="row">
+            <p class="field-label">Last name:</p>
+            <p class="field">Melnyk</p>
+        </div>
+        <div class="row">
+            <p class="field-label">Email:</p>
+            <p class="field">dan@example.com</p>
+        </div>
+        <div class="row">
+            <p class="field-label">Phone:</p>
+            <p class="field">+380-00-123-45-67</p>
+        </div>
+        <div class="row">
+            <p class="field-label">Role:</p>
+            <p class="field">User</p>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="head">
+            <h2><a class="link" href="index.html">My wallets</a></h2>
+        </div>
+
+        <ul>
+            <li>
+                <a class="link" href="wallet.html">
+                    <div class="row">
+                        <p class="field-label">Wallet 1:</p>
+                        <p class="field">100 UAH</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a class="link" href="wallet.html">
+                    <div class="row">
+                        <p class="field-label">Wallet 2:</p>
+                        <p class="field">50 USD</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>
+
+<footer>
+    <div class="footer-col">
+        <p>
+            1 lab for Web technology and web design course.
+        </p>
+    </div>
+    <div class="footer-col">
+        <p>
+            <a class="link" href="https://github.com/DanyloMelnyk/web_labs"><i class="fab fa-github"></i> Sources</a>
+        </p>
+        <p>
+            <a class="link" href="https://t.me/mel2danylo"><i class="fab fa-telegram-plane"></i> Danylo Melnyk</a> ©15.03.2021
+        </p>
+    </div>
+</footer>
+</body>
+</html>

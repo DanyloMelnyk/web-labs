@@ -1,0 +1,227 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  background: #bfbfbf;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media screen and (max-width: 1150px) {
+  body {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+header {
+  padding: 10px;
+  text-align: center;
+  background: white;
+}
+header h1 {
+  font-size: 320%;
+}
+
+nav {
+  overflow: hidden;
+  background-color: #262626;
+  margin-bottom: 20px;
+}
+nav a {
+  color: #f2f2f2;
+  background-color: #262626;
+  font-size: 110%;
+  display: block;
+  float: left;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+nav a:hover {
+  color: #d9d9d9;
+  background-color: #404040;
+}
+nav a.active {
+  background-color: #333333;
+}
+nav .right {
+  float: right;
+}
+
+footer {
+  background: #999999;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  clear: both;
+}
+footer p {
+  margin: 10px;
+}
+.footer-col {
+  float: left;
+  width: 50%;
+}
+
+.btn-bar {
+  overflow: hidden;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.btn-bar .right {
+  float: right;
+}
+
+main {
+  width: 70%;
+  float: left;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.card h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-left: 5px;
+}
+.card ul {
+  margin-top: 0;
+}
+
+aside {
+  float: right;
+  width: 28%;
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    width: 100%;
+  }
+
+  aside {
+    width: 100%;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+}
+.row {
+  display: flex;
+  margin: 5px;
+}
+.row p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.field-label, form label {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.head {
+  display: flex;
+  margin: 5px;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.head .right {
+  justify-content: flex-end;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+}
+.link:hover {
+  color: #4d4d4d;
+}
+
+.actions a {
+  font-size: 150%;
+}
+
+a.delete {
+  color: #dd6c6c;
+}
+a.delete:hover {
+  color: #d34343;
+}
+
+a.edit {
+  color: #404040;
+}
+a.edit:hover {
+  color: #262626;
+}
+
+a.send {
+  color: #5fb3ce;
+}
+a.send:hover {
+  color: #3a9fc0;
+}
+
+a.create {
+  color: #4CAF50;
+}
+a.create:hover {
+  color: #3d8b40;
+}
+
+form {
+  margin-left: auto;
+  margin-right: auto;
+}
+form label {
+  width: 30%;
+}
+form input, form input[type=reset], form select {
+  font-size: 100%;
+  width: 70%;
+}
+form input[type=button], form input[type=reset], form input[type=submit] {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  margin: 4px 2px;
+  font-weight: 500;
+  color: white;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+form input[type=button]:hover, form input[type=reset]:hover, form input[type=submit]:hover {
+  color: #e6e6e6;
+  background-color: #6ec071;
+}
+form input[type=button].active, form input.active[type=reset], form input[type=submit].active {
+  background-color: #5cb860;
+}
+form input[type=reset] {
+  color: white;
+  background-color: #dd6c6c;
+}
+form input[type=reset]:hover {
+  color: #e6e6e6;
+  background-color: #e79595;
+}
+form input[type=reset].active {
+  background-color: #e28181;
+}
+
+.centered {
+  text-align: center;
+}
+
+.error {
+  color: white;
+  background-color: #dd6c6c;
+  font-weight: 500;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=styles.css.map */

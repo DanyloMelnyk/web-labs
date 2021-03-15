@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+</head>
+<body>
+
+<header>
+    <h1>Wallets</h1>
+</header>
+
+<nav>
+    <a href="users.html">Users</a>
+    <a href="user.html">User page</a>
+    <a href="index.html">Wallets</a>
+
+    <a class="right" href="">Logout</a> <!-- FIXME -->
+    <a class="active right" href="login.html">Login</a>
+    <a class="right" href="sign-up.html">Sign Up</a>
+</nav>
+
+<main>
+    <!-- Login -->
+    <section class="card">
+        <h2 class="centered">Sign in</h2>
+        <div class="error centered">
+            Incorrect login credo
+        </div>
+
+        <form method="post" action="login">
+            <div class="row"><label for="username">Username:</label> <input id="username" name="username" type="text"
+                                                                            autocomplete="username"/>
+            </div>
+            <div class="row"><label for="password">Password:</label> <input id="password" name="password"
+                                                                            type="password"
+                                                                            autocomplete="current-password"/></div>
+            <div class="row"><input type="submit" value="Sign In"/></div>
+        </form>
+
+    </section>
+    <!-- End login -->
+</main>
+
+<footer>
+    <div class="footer-col">
+        <p>
+            1 lab for Web technology and web design course.
+        </p>
+    </div>
+    <div class="footer-col">
+        <p>
+            <a class="link" href="https://github.com/DanyloMelnyk/web_labs"><i class="fab fa-github"></i> Sources</a>
+        </p>
+        <p>
+            <a class="link" href="https://t.me/mel2danylo"><i class="fab fa-telegram-plane"></i> Danylo Melnyk</a> ©15.03.2021
+        </p>
+    </div>
+</footer>
+</body>
+</html>
