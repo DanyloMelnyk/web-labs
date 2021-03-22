@@ -92,18 +92,6 @@ footer {
   width: 50%;
 }
 
-.btn-bar {
-  overflow: hidden;
-  background-color: $primary_color;
-
-  padding: 20px;
-  margin-bottom: 20px;
-
-  .right {
-    float: right;
-  }
-}
-
 main {
   width: 70%;
   float: left;
@@ -113,16 +101,17 @@ main {
   background-color: $primary_color;
   padding: 20px;
   margin-bottom: 20px;
-
-  h2 {
-    margin-top: 0;
-    font-size: 1.5em;
-    margin-left: 5px;
-  }
+  border-radius: 6px;
 
   ul {
     margin-top: 0;
   }
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-left: 5px;
 }
 
 aside {
@@ -167,6 +156,11 @@ aside {
   .right {
     justify-content: flex-end;
   }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .link {
@@ -207,11 +201,17 @@ form {
   label {
     @extend .field-label;
     width: $label_width;
+    align-self: center;
   }
 
   input, select {
     font-size: 100%;
     width: 100% - $label_width;
+    min-height: 24px;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: $back_color;
+    box-shadow: none;
   }
 
   input[type=button], input[type=submit] {
@@ -240,6 +240,7 @@ form {
   color: $primary_color;
   background-color: $danger_color;
   font-weight: 500;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
   padding: 10px;
+  border-radius: 6px;
 }
