@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/styles/styles.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Wallets</h1>
+</header>
+
+<nav>
+    <a th:href="@{/}">Wallets</a>
+</nav>
+
+<main>
+    <section class="card">
+        <h2 class="centered">Error</h2>
+
+        <div class="row error">
+            Error! Code:
+            <span th:text="${{error_code}}">Unknown</span>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-col">
+        <p>
+            2 lab for Web technology and web design course.
+        </p>
+    </div>
+    <div class="footer-col">
+        <p>
+            <a class="link" href="https://github.com/DanyloMelnyk/web_labs"><i class="fab fa-github"></i> Sources</a>
+        </p>
+        <p>
+            <a class="link" href="https://t.me/mel2danylo"><i class="fab fa-telegram-plane"></i> Danylo Melnyk</a>
+            ©20.04.2021
+        </p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,262 @@
+@use "sass:color";
+@import "colors";
+
+$font_stack: Helvetica, sans-serif;
+
+@mixin set-link-colour($text_colour, $back_color:0) {
+  color: $text_colour;
+  @if $back_color != 0 {
+    background-color: $back_color;
+  }
+
+  &:hover {
+    color: darken($text_colour, 10%);
+
+    @if $back_color != 0 {
+      background-color: lighten($back_color, 10%);
+    }
+  }
+
+  @if $back_color != 0 {
+    &.active {
+      background-color: lighten($back_color, 5%);
+    }
+  }
+}
+
+body {
+  font: 100% $font_stack;
+  background: $back_color;
+
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media screen and (max-width: 1150px) {
+  body {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+header {
+  padding: 10px;
+  text-align: center;
+  background: $primary-color;
+
+  h1 {
+    font-size: 320%;
+  }
+}
+
+nav {
+  overflow: hidden;
+  background-color: darken($second_color, 5%);
+  margin-bottom: 20px;
+
+  a {
+    @include set-link-colour($link_color, darken($second_color, 5%));
+
+    font-size: 110%;
+    display: block;
+    float: left;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+
+  .right {
+    float: right;
+  }
+}
+
+footer {
+  background: darken($primary_color, 40%);
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  clear: both;
+
+  p {
+    margin: 10px;
+  }
+
+  a {
+
+  }
+}
+
+.footer-col {
+  float: left;
+  width: 50%;
+}
+
+main {
+  width: 70%;
+  float: left;
+}
+
+.card {
+  background-color: $primary_color;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+
+  ul {
+    margin-top: 0;
+  }
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-left: 5px;
+}
+
+aside {
+  float: right;
+  width: 28%;
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    width: 100%;
+  }
+
+  aside {
+    width: 100%;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+}
+
+.row {
+  display: flex;
+  margin: 5px;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.field-label {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.head {
+  display: flex;
+  margin: 5px;
+  justify-content: space-between;
+  flex-flow: row wrap;
+
+  .right {
+    justify-content: flex-end;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  color: $text_color;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($text_color, 30%);
+  }
+}
+
+.actions a {
+  font-size: 150%;
+}
+
+a.delete {
+  @include set-link-colour($danger_color);
+}
+
+a.edit {
+  @include set-link-colour(darken($back_color, 50%));
+}
+
+a.send {
+  @include set-link-colour($third_color);
+}
+
+a.create {
+  @include set-link-colour($success_color);
+}
+
+form {
+  margin-left: auto;
+  margin-right: auto;
+
+  $label_width: 30%;
+
+  label {
+    @extend .field-label;
+    width: $label_width;
+    align-self: center;
+  }
+
+  input, select {
+    font-size: 100%;
+    width: 100% - $label_width;
+    min-height: 24px;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: $back_color;
+    box-shadow: none;
+  }
+
+  input[type=button], input[type=submit] {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    margin: 4px 2px;
+    font-weight: 500;
+
+    @include set-link-colour($primary_color, $success_color);
+
+    cursor: pointer;
+  }
+
+  input[type=reset] {
+    @extend input, [type=button];
+    @include set-link-colour($primary_color, $danger_color);
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
+.error {
+  color: $primary_color;
+  background-color: $danger_color;
+  font-weight: 500;
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.success {
+  background-color: $success_color;
+  font-weight: 500;
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.hide {
+  display: none;
+}
+
+.invalid {
+  border-color: $danger_color;
+}
