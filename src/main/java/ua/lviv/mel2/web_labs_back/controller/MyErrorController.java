@@ -20,6 +20,7 @@ public class MyErrorController implements ErrorController {
 
             if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error-403";
+                //return "redirect:/#login";
             }
         }
 
