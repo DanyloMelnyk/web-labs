@@ -1,6 +1,4 @@
-const apiUrl = '/api/v1/';
-const admin_role = 'admin';
-
+import { apiUrl, debug } from './config';
 
 const checkStatus = (response) => {
     if (response.ok) {
@@ -9,15 +7,18 @@ const checkStatus = (response) => {
     return Promise.reject(response.status);
 };
 
-const request = (url, action, onError, method = "GET", body = null, token = null) => {
-    console.log(`Send ${method} request to ${url} with body: ${JSON.stringify(body)} and token: ${token}.`);
-    let headers = {};
-    let init = {
-        method
+const request = (url, action, onError, method = 'GET', body = null, token = null) => {
+    if (debug) {
+        console.log(`Send ${method} request to ${url} with body: ${JSON.stringify(body)} and token: ${token}.`);
+    }
+
+    const headers = {};
+    const init = {
+        method,
     };
 
     if (body) {
-        headers["Content-Type"] = 'application/json;charset=utf-8';
+        headers['Content-Type'] = 'application/json;charset=utf-8';
         init.body = JSON.stringify(body);
     }
 
@@ -36,34 +37,36 @@ const request = (url, action, onError, method = "GET", body = null, token = null
             },
             (msg) => {
                 onError(msg);
-                console.log(`Error ${msg} when send ${method} to ${url}!`)
-            }
-        )
-}
+
+                if (debug) {
+                    console.log(`Error ${msg} when send ${method} to ${url}!`);
+                }
+            },
+        );
+};
 
 const postRequest = (url, action, onError, body, token = null) => {
-    request(url, action, onError, "POST", body, token)
+    request(url, action, onError, 'POST', body, token);
 };
 
 const getRequest = (url, action, onError, token) => {
-    request(url, action, onError, "GET", null, token)
+    request(url, action, onError, 'GET', null, token);
 };
 
 const deleteRequest = (url, action, onError, token) => {
-    request(url, action, error => {
-        if (error.message.startsWith("Unexpected end of JSON input")) {
+    request(url, action, (error) => {
+        if (error.message.startsWith('Unexpected end of JSON input')) {
             action();
         } else {
             onError(error);
         }
-    }, "DELETE", null, token);
+    }, 'DELETE', null, token);
 };
 
 const putRequest = (url, action, onError, body, token) => {
-    request(url, action, onError, "PUT", body, token);
-}
+    request(url, action, onError, 'PUT', body, token);
+};
 
 export {
-    admin_role,
-    getRequest, postRequest, putRequest, deleteRequest
+    getRequest, postRequest, putRequest, deleteRequest,
 };

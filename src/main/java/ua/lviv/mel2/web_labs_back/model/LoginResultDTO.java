@@ -2,7 +2,7 @@ package ua.lviv.mel2.web_labs_back.model;
 
 import javax.validation.constraints.NotNull;
 
-public class Token {
+public class LoginResultDTO {
     @NotNull
     private String token;
 
@@ -12,7 +12,7 @@ public class Token {
     @NotNull
     private Long id;
 
-    public Token(String token, String role, Long id) {
+    public LoginResultDTO(String token, String role, Long id) {
         this.token = token;
         this.role = role;
         this.id = id;

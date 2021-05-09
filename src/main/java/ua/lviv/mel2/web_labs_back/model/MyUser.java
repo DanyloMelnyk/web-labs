@@ -50,7 +50,7 @@ public class MyUser implements UserDetails {
         this.firstName = username.split("-")[0];
         this.lastName = "Lastname";
         this.email = username + "@gmail.com";
-        this.phone = String.valueOf(Math.abs(new Random().nextLong()) % 10000000000L);
+        this.phone = String.valueOf(Math.abs(new Random().nextLong() % 10000000000L) );
     }
 
     public Long getId() {

@@ -1,9 +1,9 @@
-import Profile from "./Profile";
-import UserWallets from "./UserWallets";
+import Profile from './Profile';
+import UserWallets from './UserWallets';
 
 const React = require('react');
 
-function Sidebar() {
+export default function Sidebar() {
     return (
         <aside>
             <Profile/>
@@ -11,5 +11,3 @@ function Sidebar() {
         </aside>
     );
 }
-
-export default Sidebar;

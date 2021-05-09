@@ -1,63 +1,45 @@
-import Sidebar from "../sidebar/Sidebar";
+import Card from '../components/Card';
+import Row from '../components/Row';
+import PageWithSidebar from './PageWithSidebar';
 
 const React = require('react');
 
-function WalletsPage() { // FIXME
-    return ([
-        <main>
-            <h1>WIP</h1>
-            STATIC
-            <div className="card">
-                <div className="head">
-                    <h1>My wallets</h1>
-                    <div className="right actions">
-                        <a className="create" href="create-wallet.html"><i className="fas fa-plus-square"></i></a>
+export default function WalletsPage() { // FIXME
+    return (
+        <PageWithSidebar>
+            <h1>WIP STATIC</h1>
+            <Card title='My wallets'
+                actions={
+                    <div className='right actions'>
+                        <a className='create' href='create-wallet.html'><i className='fas fa-plus-square'/></a>
                     </div>
-                </div>
-            </div>
+                }/>
 
-            <section className="card">
-                <div className="head">
-                    <h2><a className="link" href="wallet.html">My wallet 1</a></h2>
-                    <div className="actions">
-                        <a className="edit" href="edit-wallet.html"><i className="fas fa-edit"></i></a>
-                        <a className="delete" href="wallet/ID/delete"><i className="fas fa-trash"></i></a>
-                        <a className="send" href="create-transaction.html"><i className="fas fa-share"></i></a>
+            <Card title={<a className='link' href='wallet.html'>My wallet 1</a>}
+                actions={
+                    <div className='actions'>
+                        <a className='edit' href='edit-wallet.html'><i className='fas fa-edit'/></a>
+                        <a className='delete' href='wallet/ID/delete'><i className='fas fa-trash'/></a>
+                        <a className='send' href='create-transaction.html'><i className='fas fa-share'/></a>
                     </div>
-                </div>
+                }>
 
-                <div className="row">
-                    <p className="field-label">Balance:</p>
-                    <p className="field">100</p>
-                </div>
-                <div className="row">
-                    <p className="field-label">Currency:</p>
-                    <p className="field">UAH</p>
-                </div>
-            </section>
+                <Row label='Balance:' value='100'/>
+                <Row label='Currency:' value='UAH'/>
+            </Card>
 
-            <section className="card">
-                <div className="head">
-                    <h2><a className="link" href="wallet.html">My wallet 2</a></h2>
-                    <div className="actions">
-                        <a className="edit" href="edit-wallet.html"><i className="fas fa-edit"></i></a>
-                        <a className="delete" href="wallet/ID/delete"><i className="fas fa-trash"></i></a>
-                        <a className="send" href="create-transaction.html"><i className="fas fa-share"></i></a>
+            <Card title={<a className='link' href='wallet.html'>My wallet 2</a>}
+                actions={
+                    <div className='actions'>
+                        <a className='edit' href='edit-wallet.html'><i className='fas fa-edit'/></a>
+                        <a className='delete' href='wallet/ID/delete'><i className='fas fa-trash'/></a>
+                        <a className='send' href='create-transaction.html'><i className='fas fa-share'/></a>
                     </div>
-                </div>
+                }>
 
-                <div className="row">
-                    <p className="field-label">Balance:</p>
-                    <p className="field">50</p>
-                </div>
-                <div className="row">
-                    <p className="field-label">Currency:</p>
-                    <p className="field">USD</p>
-                </div>
-            </section>
-        </main>,
-        <Sidebar/>
-    ]);
+                <Row label='Balance:' value='50'/>
+                <Row label='Currency:' value='USD'/>
+            </Card>
+        </PageWithSidebar>
+    );
 }
-
-export default WalletsPage;

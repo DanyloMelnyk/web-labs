@@ -1,21 +1,27 @@
-import {useState} from "react";
-import {withRouter} from "react-router";
-import {postRequest} from "../common";
-import {passMismatch, unknownError, userExists} from "../config";
+import { useState } from 'react';
+import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import { postRequest } from '../common';
+import { passMismatch, unknownError, userExists } from '../config';
+import FormRow from '../components/FormRow';
+import Card from '../components/Card';
 
 const React = require('react');
 
-function SignUpPage({history, location}) { // FIXME
+function SignUpPage({
+    history,
+    location,
+}) {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
     const [password, setPassword] = useState();
     const [passwordConfirm, setPasswordConfirm] = useState();
-    const [role, setRole] = useState("user");
+    const [role, setRole] = useState('user');
 
     const [error, setError] = useState();
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         if (passwordConfirm !== password) {
@@ -24,18 +30,17 @@ function SignUpPage({history, location}) { // FIXME
             setPasswordConfirm(e.target.value);
             setError(null);
 
-            postRequest("public/user",
+            postRequest('public/user',
                 () => {
-                    const {from} = location.state || {from: {pathname: "/"}};
+                    const { from } = location.state || { from: { pathname: '/' } };
                     history.push(from);
                 },
-                error => {
-                    if (error === 400) {
+                (errorCode) => {
+                    if (errorCode === 400) {
                         setError(userExists);
                     } else {
                         setError(unknownError);
                     }
-                    console.log(error)
                 },
                 {
                     username,
@@ -43,9 +48,8 @@ function SignUpPage({history, location}) { // FIXME
                     phone,
                     password,
                     passwordConfirm,
-                    role
-                }
-            );
+                    role,
+                });
         }
     };
 
@@ -60,63 +64,59 @@ function SignUpPage({history, location}) { // FIXME
 
     return (
         <main>
-            <section className="card">
-                <h2 className="centered">Sign up</h2>
-
+            <Card title="Sign up">
                 <form onSubmit={handleSubmit}>
-                    {error &&
-                    <div className="row error">
+                    {error
+                    && <div className="row error">
                         {error}
                     </div>
                     }
 
-                    <div className="row">
-                        <label htmlFor="username">Username: *</label>
-                        <input onChange={e => setUsername(e.target.value)} autoComplete="username" id="username"
-                               name="username" required type="text" className={error === userExists & "invalid"}/>
-                    </div>
+                    <FormRow label="Username: *" inputId="username"
+                        onChange={(e) => setUsername(e.target.value)}
+                        autoComplete="username" name="username" required type="text"
+                        className={error === userExists ? 'invalid' : undefined}/>
 
-                    <div className="row">
-                        <label htmlFor="email">Email: *</label>
-                        <input onChange={e => setEmail(e.target.value)} autoComplete="email" id="email" name="email"
-                               required type="email"/>
-                    </div>
+                    <FormRow label="Email: *" inputId="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="email" name="email" required type="email"/>
 
-                    <div className="row">
-                        <label htmlFor="phone">Phone:</label>
-                        <input onChange={e => setPhone(e.target.value)} autoComplete="phone" id="phone" name="phone"
-                               type="tel"/>
-                    </div>
+                    <FormRow label="Phone:" inputId="phone"
+                        onChange={(e) => setPhone(e.target.value)}
+                        autoComplete="phone" name="phone" type="tel"/>
 
-                    <div className="row">
-                        <label htmlFor="password">Password: *</label>
-                        <input onChange={e => setPassword(e.target.value)} autoComplete="new-password" id="password"
-                               name="password" required type="password"/>
-                    </div>
+                    <FormRow label="Password: *" inputId="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password" name="password" required type="password"/>
 
-                    <div className="row">
-                        <label htmlFor="password-confirm">Confirm password: *</label>
-                        <input onChange={checkAndSetConfirmPass} autoComplete="new-password"
-                               id="password-confirm" name="password" required
-                               type="password" className={error === passMismatch ? "invalid" : ""}/>
-                    </div>
+                    <FormRow label="Confirm password: *" inputId="password-confirm"
+                        onChange={checkAndSetConfirmPass}
+                        autoComplete="new-password" id="" name="password" required
+                        type="password"
+                        className={error === passMismatch ? 'invalid' : ''}/>
 
-                    <div className="row">
-                        <label htmlFor="role">Role:</label>
-                        <select onChange={e => setRole(e.target.value)} id="role" name="role">
+                    <FormRow label="Role:" inputId="role" rest={null}>
+                        <select onChange={(e) => setRole(e.target.value)} id="role" name="role">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>
-                    </div>
+                    </FormRow>
 
                     <div className="row">
                         <input id="signUp" type="submit" value="Sign Up"/>
                         <input type="reset" value="Cancel"/>
                     </div>
                 </form>
-            </section>
+            </Card>
         </main>
     );
 }
+
+SignUpPage.propTypes = {
+    history: PropTypes.object,
+    location: PropTypes.shape({
+        state: PropTypes.object,
+    }),
+};
 
 export default withRouter(SignUpPage);

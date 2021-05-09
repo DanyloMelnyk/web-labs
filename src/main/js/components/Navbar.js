@@ -1,18 +1,18 @@
-import {NavLink} from 'react-router-dom';
-import {admin_role} from "../common";
-import {useContext} from "react";
-import {UserContext} from "../UserContext";
+import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../UserContext';
+import { adminRole } from '../config';
 
 const React = require('react');
 
-function Navbar() {
-    const {role, userId, logout} = useContext(UserContext);
+export default function Navbar() {
+    const { role, userId, logout } = useContext(UserContext);
 
     if (role) {
         return (
             <nav>
-                {role === admin_role && <NavLink to='/user' activeClassName='active'>Users</NavLink>}
-                <NavLink to={'/user/' + userId}>User page</NavLink>
+                {role === adminRole && <NavLink to='/user' activeClassName='active'>Users</NavLink>}
+                <NavLink to={`/user/${userId}`}>User page</NavLink>
                 <NavLink exact to='/' activeClassName='active'>Wallets</NavLink>
                 <NavLink onClick={
                     (e) => {
@@ -29,7 +29,5 @@ function Navbar() {
             <NavLink to='/login' className='right' activeClassName='active'>Login</NavLink>
             <NavLink to='/sign-up' className='right' activeClassName='active'>Sign Up</NavLink>
         </nav>
-    )
+    );
 }
-
-export default Navbar;

@@ -1,7 +1,8 @@
-import Sidebar from "../sidebar/Sidebar";
-import {deleteRequest, getRequest} from "../common";
-import {UserContext} from "../UserContext";
-import User from "../components/User";
+import PropTypes from 'prop-types';
+import { deleteRequest, getRequest } from '../common';
+import UserContext from '../UserContext';
+import User from '../components/User';
+import PageWithSidebar from './PageWithSidebar';
 
 const React = require('react');
 
@@ -13,71 +14,78 @@ export default class UserPage extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            user: null
+            user: null,
         };
     }
 
     componentDidMount() {
-        const {token} = this.context;
+        const { token } = this.context;
         getRequest(`user/${this.props.match.params.id}`, (data) => {
             this.setState({
                 isLoaded: true,
-                user: data
+                user: data,
             });
         }, (error) => {
             this.setState({
                 isLoaded: true,
-                error
+                error,
             });
         }, token);
     }
 
     render() {
         const deleteUser = (id) => {
-            const {userId, logout, token} = this.context;
+            const {
+                userId,
+                logout,
+                token,
+            } = this.context;
 
             deleteRequest(`user/${id}`, () => {
                 if (id === userId) {
                     logout();
                 } else {
-                    history.push("/");
+                    history.push('/');
                 }
             }, () => null, token);
-        }
+        };
 
-        const {error, isLoaded, user} = this.state;
+        const {
+            error,
+            isLoaded,
+            user,
+        } = this.state;
 
         if (error) {
             return (
-                <div>
-                    <main>
-                        <div className="row error">
-                            {error}
-                        </div>
-                    </main>
-                    <Sidebar/>
-                </div>
-            )
-        } else if (!isLoaded) {
-            return (
-                <div>
-                    <main>
-                        <div className="row error">
-                            Loading...
-                        </div>
-                    </main>
-                    <Sidebar/>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <main>
-                        <User user={user} deleteUser={deleteUser}/>
-                    </main>
-                    <Sidebar/>
-                </div>
+                <PageWithSidebar>
+                    <div className="row error">
+                        {error}
+                    </div>
+                </PageWithSidebar>
             );
         }
+        if (!isLoaded) {
+            return (
+                <PageWithSidebar>
+                    <div className="row error">
+                        Loading...
+                    </div>
+                </PageWithSidebar>
+            );
+        }
+        return (
+            <PageWithSidebar>
+                <User user={user} deleteUser={deleteUser}/>
+            </PageWithSidebar>
+        );
     }
 }
+
+UserPage.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+        }),
+    }),
+};

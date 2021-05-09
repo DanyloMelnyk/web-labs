@@ -1,5 +1,8 @@
-const passMismatch = "Passwords do not match!";
-const userExists = "User with that username already exists";
-const unknownError = "Unknown error";
+export const apiUrl = '/api/v1/';
+export const debug = false;
 
-export {passMismatch, userExists, unknownError};
+export const passMismatch = 'Passwords do not match!';
+export const userExists = 'User with that username already exists';
+export const unknownError = 'Unknown error';
+
+export const adminRole = 'admin';

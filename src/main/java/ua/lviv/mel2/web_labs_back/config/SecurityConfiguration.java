@@ -1,6 +1,7 @@
 package ua.lviv.mel2.web_labs_back.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -44,20 +45,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/built/bundle.js").permitAll()
                 .antMatchers("/api/v1/public/*").permitAll()
                 .antMatchers("/*").permitAll()
-//                .antMatchers("/sign-up").permitAll() // сторінка реєстрації
-//                .antMatchers("/wallet/*/edit").hasAuthority("admin")
-//                .antMatchers(HttpMethod.POST, "/api/v1/user").permitAll() // API endpoint реєстрації
-//                .antMatchers(HttpMethod.GET, "/api/v1/user").hasAuthority("admin")
-//                .antMatchers(HttpMethod.PUT, "/api/v1/wallet/*").hasAuthority("admin")
-//                .antMatchers("/user").hasAuthority("admin")
+                .antMatchers(HttpMethod.GET, "/api/v1/user").hasAuthority("admin")
+                .antMatchers(HttpMethod.PUT, "/api/v1/wallet/*").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//                .formLogin()
-//                .permitAll()
-//                .and()
-//                .logout().permitAll();
     }
 
     @Bean

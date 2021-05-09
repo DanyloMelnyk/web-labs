@@ -32,13 +32,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Token login(@RequestBody @Valid LoginDTO request) {
+    public LoginResultDTO login(@RequestBody @Valid LoginDTO request) {
         System.out.println(request);
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
         MyUser user = (MyUser) authenticate.getPrincipal();
-        return new Token(jwtTokenUtil.generateAccessToken(user), user.getRole(), user.getId());
+        return new LoginResultDTO(jwtTokenUtil.generateAccessToken(user), user.getRole(), user.getId());
     }
 
     @PostMapping("/user")

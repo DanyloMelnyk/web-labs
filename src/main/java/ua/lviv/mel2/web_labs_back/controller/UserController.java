@@ -1,18 +1,15 @@
 package ua.lviv.mel2.web_labs_back.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.mel2.web_labs_back.exceptions.UserNotFoundException;
 import ua.lviv.mel2.web_labs_back.model.MyUser;
 import ua.lviv.mel2.web_labs_back.model.MyUserDTO;
-import ua.lviv.mel2.web_labs_back.model.UserAuthStatus;
 import ua.lviv.mel2.web_labs_back.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/user")

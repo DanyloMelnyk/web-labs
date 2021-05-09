@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     entry: './src/main/js/app.js',
@@ -7,7 +7,7 @@ module.exports = {
     mode: 'development',
     output: {
         path: __dirname,
-        filename: './src/main/resources/static/built/bundle.js'
+        filename: './src/main/resources/static/built/bundle.js',
     },
     watch: true,
     module: {
@@ -17,9 +17,9 @@ module.exports = {
                 exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 options: {
-                    presets: ["@babel/preset-env", "@babel/preset-react"]
-                }
-            }
-        ]
-    }
+                    presets: ['@babel/preset-env', '@babel/preset-react'],
+                },
+            },
+        ],
+    },
 };
