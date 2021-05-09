@@ -33,24 +33,6 @@ public class UserController {
         return userService.getUsers(email, firstName, lastName);
     }
 
-    @PostMapping
-    public ResponseEntity<MyUser> createUser(@Valid @RequestBody MyUserDTO userDTO) {
-        MyUser user = new MyUser();
-        user.setUsername(userDTO.getUsername());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
-        user.setPhone(userDTO.getPhone());
-        user.setPassword(encoder.encode(userDTO.getPassword()));
-        user.setRole(userDTO.getRole());
-        user.setUserAuthStatus(UserAuthStatus.NOT_SIGNED_IN);
-
-
-        Optional<MyUser> createdUser = userService.createUser(user);
-        return createdUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().body(null));
-
-    }
-
     @GetMapping("/{id}")
     public MyUser getUser(@PathVariable Long id, Authentication authentication) {
         Object principal = authentication.getPrincipal();

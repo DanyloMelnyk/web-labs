@@ -5,6 +5,7 @@ const React = require('react');
 function WalletsPage() { // FIXME
     return ([
         <main>
+            <h1>WIP</h1>
             STATIC
             <div className="card">
                 <div className="head">

@@ -6,8 +6,16 @@ public class Token {
     @NotNull
     private String token;
 
-    public Token(String token) {
+    @NotNull
+    private String role;
+
+    @NotNull
+    private Long id;
+
+    public Token(String token, String role, Long id) {
         this.token = token;
+        this.role = role;
+        this.id = id;
     }
 
     public String getToken() {
@@ -16,5 +24,21 @@ public class Token {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

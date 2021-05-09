@@ -10,37 +10,6 @@ const checkStatus = (response) => {
     return Promise.reject(response.status);
 };
 
-const getRequest = (url, action) => {
-    fetch(url)
-        .then(checkStatus)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);
-        })
-        .catch(() => {
-            // `Error ${msg} when send GET to ${url}!`);
-        });
-};
-
-const postRequest = (url, action, onError, body) => {
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-        body,
-    })
-        .then(checkStatus)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);
-        })
-        .catch((msg) => {
-            onError(msg);
-            // `Error ${msg} when send POST to ${url}!`
-        });
-};
-
 const putRequest = (url, action, body) => {
     fetch(url, {
         method: 'PUT',
@@ -59,20 +28,6 @@ const putRequest = (url, action, body) => {
         });
 };
 
-const deleteRequest = (url, action) => {
-    fetch(url, {
-        method: 'DELETE',
-    })
-        .then(checkStatus)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);
-        })
-        .catch(() => {
-            // `Error ${msg} when send DELETE to ${url}!`
-        });
-};
-
 const formAsideWallets = (wallets) => {
     const sideWallet = document.createElement('section');
     sideWallet.className = 'card';
@@ -86,10 +41,10 @@ const formAsideWallets = (wallets) => {
     sidebar.appendChild(sideWallet);
 
     wallets.forEach((wallet) => {
-        const { name } = wallet;
+        const {name} = wallet;
         const walletUrl = `/wallet/${wallet.id}`;
-        const { balance } = wallet;
-        const { currency } = wallet;
+        const {balance} = wallet;
+        const {currency} = wallet;
 
         const li = document.createElement('li');
 
@@ -110,11 +65,11 @@ const formAsideUser = (user) => {
 
     sidebar.appendChild(sideUserProfile);
 
-    const { firstName } = user;
-    const { lastName } = user;
-    const { email } = user;
-    const { phone } = user;
-    const { role } = user;
+    const {firstName} = user;
+    const {lastName} = user;
+    const {email} = user;
+    const {phone} = user;
+    const {role} = user;
 
     const userUrl = '/user/current';
 
@@ -166,6 +121,6 @@ const checkPass = (passInput, passConfirmInput) => {
 export {
     apiUrl, main, sidebar,
     checkStatus, checkPass,
-    getRequest, postRequest, putRequest, deleteRequest,
+    putRequest,
     formAside,
 };

@@ -1,36 +1,12 @@
 import {useState} from "react";
+import {withRouter} from "react-router";
+
+import {postRequest} from "../common";
 
 const React = require('react');
 
-const checkStatus = (response) => {
-    if (response.ok) {
-        return response;
-    }
-    return Promise.reject(response.status);
-};
 
-const postRequest = (url, action, onError, body) => {
-
-    console.log(JSON.stringify(body));
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(body),
-    })
-        .then(checkStatus)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);
-        })
-        .catch((msg) => {
-            onError(msg);
-            // `Error ${msg} when send POST to ${url}!`
-        });
-};
-
-function LoginPage({setToken}) { // FIXME
+function LoginPage({setToken, history, location}) { // FIXME
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [hasError, setError] = useState(false);
@@ -38,9 +14,11 @@ function LoginPage({setToken}) { // FIXME
     const handleSubmit = e => {
         e.preventDefault();
 
-        postRequest("/api/v1/public/login",
+        postRequest("public/login",
             token => {
                 setToken(token);
+                const {from} = location.state || {from: {pathname: "/"}};
+                history.push(from);
             },
             msg => {
                 setError(true);
@@ -66,14 +44,14 @@ function LoginPage({setToken}) { // FIXME
                     }
 
                     <div className="row">
-                        <label htmlFor="username">Username:</label>
-                        <input autoComplete="username" id="username" name="username" type="text"
+                        <label htmlFor="username">Username: *</label>
+                        <input required autoComplete="username" id="username" name="username" type="text"
                                onChange={e => setUsername(e.target.value)}/>
                     </div>
 
                     <div className="row">
-                        <label htmlFor="password">Password:</label>
-                        <input autoComplete="current-password" id="password" name="password" type="password"
+                        <label htmlFor="password">Password: *</label>
+                        <input required autoComplete="current-password" id="password" name="password" type="password"
                                onChange={e => setPassword(e.target.value)}/>
                     </div>
 
@@ -87,4 +65,4 @@ function LoginPage({setToken}) { // FIXME
     );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

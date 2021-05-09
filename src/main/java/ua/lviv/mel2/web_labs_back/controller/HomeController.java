@@ -1,31 +1,15 @@
 package ua.lviv.mel2.web_labs_back.controller;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
-import ua.lviv.mel2.web_labs_back.exceptions.ForbiddenException;
-import ua.lviv.mel2.web_labs_back.model.MyUser;
 
 @Controller
 public class HomeController {
     @RequestMapping("/")
     public String index() {
         return "index";
-//        return "wallets";
     }
 
-//    @RequestMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
-//
-//    @RequestMapping("/sign-up")
-//    public String signUp() {
-//        return "sign-up";
-//    }
-//
 //    @RequestMapping("/user/{id}")
 //    public String userPage(@PathVariable Long id, Authentication authentication) {
 //        MyUser user = (MyUser) authentication.getPrincipal();

@@ -1,41 +1,75 @@
 import {Link} from 'react-router-dom';
+import {getRequest} from "../common";
+import {UserContext} from "../UserContext";
+import Row from "../components/Row";
 
 const React = require('react');
 
-function Profile() { // FIXME
-    return (
-        <section className='card'>
-            STATIC
-            <div className='head'>
-                <h2>
-                    <Link className='link' to='profile'>
-                        My profile
-                    </Link>
-                </h2>
-            </div>
+export default class Profile extends React.Component {
+    static contextType = UserContext;
 
-            <div className='row'>
-                <p className='field-label'>First name:</p>
-                <p className='field'>Danylo</p>
-            </div>
-            <div className='row'>
-                <p className='field-label'>Last name:</p>
-                <p className='field'>Melnyk</p>
-            </div>
-            <div className='row'>
-                <p className='field-label'>Email:</p>
-                <p className='field'>dan@example.com</p>
-            </div>
-            <div className='row'>
-                <p className='field-label'>Phone:</p>
-                <p className='field'>+380-00-123-45-67</p>
-            </div>
-            <div className='row'>
-                <p className='field-label'>Role:</p>
-                <p className='field'>User</p>
-            </div>
-        </section>
-    );
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            user: null
+        };
+    }
+
+    componentDidMount() {
+        const {token, userId} = this.context;
+        getRequest(`user/${userId}`, (data) => {
+            this.setState({
+                isLoaded: true,
+                user: data
+            });
+        }, (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        }, token);
+    }
+
+    render() {
+        const {error, isLoaded, user} = this.state;
+
+        if (error) {
+            return (
+                <section className='card'>
+                    <div className="row error">
+                        {error}
+                    </div>
+                </section>
+            )
+        } else if (!isLoaded) {
+            return (
+                <section className='card'>
+                    <div className="row">
+                        Loading...
+                    </div>
+                </section>
+            )
+        } else {
+            return (
+                <section className='card'>
+                    <div className='head'>
+                        <h2>
+                            <Link className='link' to={"/user/" + user.id}>
+                                My profile
+                            </Link>
+                        </h2>
+                    </div>
+
+                    <Row label='First name:' value={user.firstName}/>
+                    <Row label='Last name:' value={user.lastName}/>
+                    <Row label='Email:' value={user.email}/>
+                    <Row label='Phone:' value={user.phone}/>
+                    <Row label='Role:' value={user.role}/>
+                </section>
+            );
+        }
+    }
+
 }
-
-export default Profile;

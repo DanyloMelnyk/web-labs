@@ -12,6 +12,7 @@ import ua.lviv.mel2.web_labs_back.model.MyUser;
 import ua.lviv.mel2.web_labs_back.model.Wallet;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,9 +29,13 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(IWalletRepository walletRepository, IUserRepository userRepository) {
         return args -> {
-            List<MyUser> users = Arrays.asList(
+            List<MyUser> users = new ArrayList<>(Arrays.asList(
                     new MyUser("user", encoder.encode("pass")),
-                    new MyUser("admin", encoder.encode("pass")));
+                    new MyUser("admin", encoder.encode("pass"))));
+
+            for (int i = 1; i <= 10; i++) {
+                users.add(new MyUser("user" + i, encoder.encode("pass")));
+            }
 
             users.get(1).setRole("admin");
 

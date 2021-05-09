@@ -1,47 +1,83 @@
 import Sidebar from "../sidebar/Sidebar";
+import {deleteRequest, getRequest} from "../common";
+import {UserContext} from "../UserContext";
+import User from "../components/User";
 
 const React = require('react');
 
-function UserPage(props) { // FIXME
-    return ([
-        <main>
-            STATIC
-            <br/>
-            cur user id = {props.match.params.id}
-            <section className='card'>
-                <div className='head'>
-                    <h2>mel2</h2>
-                    <div className='actions'>
-                        <a className='edit' href='edit-user.html'><i className='fas fa-edit'/></a>
-                        <a className='delete' href='/user/ID/delete'><i className='fas fa-trash'/></a>
-                    </div>
-                </div>
+export default class UserPage extends React.Component {
+    static contextType = UserContext;
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            user: null
+        };
+    }
 
-                <div className='row'>
-                    <p className='field-label'>First name:</p>
-                    <p className='field'>Danylo</p>
+    componentDidMount() {
+        const {token} = this.context;
+        getRequest(`user/${this.props.match.params.id}`, (data) => {
+            this.setState({
+                isLoaded: true,
+                user: data
+            });
+        }, (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        }, token);
+    }
+
+    render() {
+        const deleteUser = (id) => {
+            const {userId, logout, token} = this.context;
+
+            deleteRequest(`user/${id}`, () => {
+                if (id === userId) {
+                    logout();
+                } else {
+                    history.push("/");
+                }
+            }, () => null, token);
+        }
+
+        const {error, isLoaded, user} = this.state;
+
+        if (error) {
+            return (
+                <div>
+                    <main>
+                        <div className="row error">
+                            {error}
+                        </div>
+                    </main>
+                    <Sidebar/>
                 </div>
-                <div className='row'>
-                    <p className='field-label'>Last name:</p>
-                    <p className='field'>Melnyk</p>
+            )
+        } else if (!isLoaded) {
+            return (
+                <div>
+                    <main>
+                        <div className="row error">
+                            Loading...
+                        </div>
+                    </main>
+                    <Sidebar/>
                 </div>
-                <div className='row'>
-                    <p className='field-label'>Email:</p>
-                    <p className='field'>dan@example.com</p>
+            )
+        } else {
+            return (
+                <div>
+                    <main>
+                        <User user={user} deleteUser={deleteUser}/>
+                    </main>
+                    <Sidebar/>
                 </div>
-                <div className='row'>
-                    <p className='field-label'>Phone:</p>
-                    <p className='field'>+380-00-123-45-67</p>
-                </div>
-                <div className='row'>
-                    <p className='field-label'>Role:</p>
-                    <p className='field'>User</p>
-                </div>
-            </section>
-        </main>,
-        <Sidebar/>
-    ]);
+            );
+        }
+    }
 }
-
-export default UserPage;
