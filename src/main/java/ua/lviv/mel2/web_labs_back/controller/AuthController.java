@@ -33,7 +33,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public LoginResultDTO login(@RequestBody @Valid LoginDTO request) {
-        System.out.println(request);
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 

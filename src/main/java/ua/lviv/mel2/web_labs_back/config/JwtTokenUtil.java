@@ -10,22 +10,25 @@ import static java.lang.String.format;
 
 @Component
 public class JwtTokenUtil {
-    private static final String JWT_SECRET = "zdtlD3JKsggs56242gsdgsm6wTTgsNFhqzjqP";
-    private static final String JWT_ISSUER = "localhost";
+    private JwtConfig configuration;
+
+    public JwtTokenUtil(JwtConfig configuration) {
+        this.configuration = configuration;
+    }
 
     public String generateAccessToken(MyUser user) {
         return Jwts.builder()
                 .setSubject(format("%s,%s", user.getId(), user.getUsername()))
-                .setIssuer(JWT_ISSUER)
+                .setIssuer(configuration.jwtIssuer)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                .signWith(SignatureAlgorithm.HS512, configuration.jwtSecret)
                 .compact();
     }
 
     public String getUserId(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
+                .setSigningKey(configuration.jwtSecret)
                 .parseClaimsJwt(token)
                 .getBody();
 
@@ -34,7 +37,7 @@ public class JwtTokenUtil {
 
     public String getUsername(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
+                .setSigningKey(configuration.jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -43,7 +46,7 @@ public class JwtTokenUtil {
 
     public Date getExpirationDate(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(JWT_SECRET)
+                .setSigningKey(configuration.jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -52,7 +55,7 @@ public class JwtTokenUtil {
 
     public boolean validate(String token) {
         try {
-            Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(configuration.jwtSecret).parseClaimsJws(token);
             return true;
         } catch (SignatureException ex) {
             System.out.println("Invalid JWT signature - " + ex.getMessage());

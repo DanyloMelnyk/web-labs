@@ -45,7 +45,7 @@ function LoginPage({
                     </div>
                     }
 
-                    <FormRow label="Username: *" inputId={username} required autoComplete="username"
+                    <FormRow label="Username: *" inputId="username" required autoComplete="username"
                         name="username"
                         type="text" onChange={(e) => setUsername(e.target.value)}/>
 
