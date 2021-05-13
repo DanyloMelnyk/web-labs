@@ -4,7 +4,7 @@
 [Sources](https://github.com/DanyloMelnyk/web-labs)
 
 [HtmlTemplates](https://github.com/DanyloMelnyk/web-labs/tree/development/src/main/resources/templates)
-[JsScripts](https://github.com/DanyloMelnyk/web-labs/tree/development/src/main/resources/static)
+[JsScripts](https://github.com/DanyloMelnyk/web-labs/tree/development/src/main/js)
 
 
 Test users:
