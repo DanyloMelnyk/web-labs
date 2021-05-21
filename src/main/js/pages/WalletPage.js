@@ -1,31 +1,29 @@
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import { deleteRequest, getRequest } from '../common';
 import UserContext from '../UserContext';
-import User from '../components/User';
 import PageWithSidebar from './PageWithSidebar';
+import Wallet from '../components/Wallet';
 
 const React = require('react');
 
-class UserPage extends React.Component {
+export default class WalletPage extends React.Component {
     static contextType = UserContext;
 
     constructor(props) {
         super(props);
-
         this.state = {
             error: null,
             isLoaded: false,
-            user: null,
+            wallet: null,
         };
     }
 
     componentDidMount() {
         const { token } = this.context;
-        getRequest(`user/${this.props.match.params.id}`, (data) => {
+        getRequest(`wallet/${this.props.match.params.id}`, (data) => {
             this.setState({
                 isLoaded: true,
-                user: data,
+                wallet: data,
             });
         }, (error) => {
             this.setState({
@@ -36,26 +34,18 @@ class UserPage extends React.Component {
     }
 
     render() {
-        const deleteUser = (id) => {
-            const {
-                userId,
-                logout,
-                token,
-            } = this.context;
+        const deleteWallet = (id) => {
+            const { token } = this.context;
 
-            deleteRequest(`user/${id}`, () => {
-                if (id === userId) {
-                    logout();
-                } else {
-                    this.props.history.push('/');
-                }
+            deleteRequest(`wallet/${id}`, () => {
+                this.props.history.push('/');
             }, () => null, token);
         };
 
         const {
             error,
             isLoaded,
-            user,
+            wallet,
         } = this.state;
 
         if (error) {
@@ -78,13 +68,13 @@ class UserPage extends React.Component {
         }
         return (
             <PageWithSidebar>
-                <User user={user} deleteUser={deleteUser}/>
+                <Wallet wallet={wallet} deleteWallet={deleteWallet}/>
             </PageWithSidebar>
         );
     }
 }
 
-UserPage.propTypes = {
+WalletPage.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -94,5 +84,3 @@ UserPage.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
-
-export default withRouter(UserPage);

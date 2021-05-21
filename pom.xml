@@ -6,11 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>ua.lviv.mel2</groupId>
     <artifactId>web_labs_back</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>web_labs_back</name>
     <description>Backend for web labs on Spring Boot</description>
     <properties>

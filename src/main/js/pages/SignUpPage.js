@@ -113,10 +113,12 @@ function SignUpPage({
 }
 
 SignUpPage.propTypes = {
-    history: PropTypes.object,
     location: PropTypes.shape({
         state: PropTypes.object,
     }),
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default withRouter(SignUpPage);

@@ -18,6 +18,10 @@ import WalletsPage from './pages/WalletsPage';
 
 import useToken from './useToken';
 import UserContext from './UserContext';
+import WalletPage from './pages/WalletPage';
+import WalletCreatingPage from './pages/WalletCreatingPage';
+import EditWalletPage from './pages/EditWalletPage';
+import TransactionPage from './pages/TransactionPage';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -39,12 +43,16 @@ function App() {
                 <Navbar/>
                 <Switch>
                     <Route path='/login'>
-                        <LoginPage setToken={setToken} history={history}/>
+                        <LoginPage setToken={setToken}/>
                     </Route>
-                    <Route path='/sign-up'>
-                        <SignUpPage history={history}/>
-                    </Route>
+                    <Route path="/sign-up" component={SignUpPage}/>
+
                     <PrivateRoute exact path='/' component={WalletsPage}/>
+                    <PrivateRoute exact path='/wallet/create' component={WalletCreatingPage}/>
+                    <PrivateRoute exact path='/wallet/:id' component={WalletPage}/>
+                    <PrivateRoute exact path='/wallet/:id/edit' component={EditWalletPage}/>
+                    <PrivateRoute exact path='/wallet/:id/send' component={TransactionPage}/>
+
                     <PrivateRoute roles={adminRole} exact path='/user/' component={UsersPage}/>
 
                     <PrivateRoute exact path='/user/:id' component={UserPage}/>
@@ -52,7 +60,7 @@ function App() {
                     <Redirect to='/'/>
                 </Switch>
 
-                <Footer lab='3' date='08.05.2021'/>
+                <Footer lab='4' date='21.05.2021'/>
             </HashRouter>
         </UserContext.Provider>
     );
