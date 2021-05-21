@@ -54,11 +54,20 @@ public class WalletController {
     }
 
     @PutMapping("/{id}")
-    public Wallet updateWallet(@Valid @RequestBody NewWalletDto newWallet, @PathVariable Long id) {
+    public Wallet updateWallet(@Valid @RequestBody NewWalletDto newWallet, @PathVariable Long id, Authentication authentication) {
         Wallet wallet = repository.findById(id).orElseThrow(() -> new WalletNotFoundException(id));
+
+        MyUser user = (MyUser) (authentication.getPrincipal());
+        if (!wallet.getUserId().equals(user.getId()) && !user.getRole().equals("admin")) {
+            throw new WalletNotFoundException(id);
+        }
+
         wallet.setName(newWallet.getWalletName());
-        wallet.setCurrency(newWallet.getCurrency());
-        wallet.setBalance(newWallet.getBalance());
+
+        if (user.getRole().equals("admin")) {
+            wallet.setBalance(newWallet.getBalance());
+            wallet.setCurrency(newWallet.getCurrency());
+        }
 
         return repository.save(wallet);
     }
@@ -73,26 +82,26 @@ public class WalletController {
         long userId = ((MyUser) authentication.getPrincipal()).getId();
         Wallet sender = repository.findById(senderId).orElseThrow(() -> new WalletNotFoundException(senderId));
         if (sender.getUserId() != userId) {
-            throw new WalletNotFoundException(senderId);
+            throw new WalletNotFoundException("You don't have access to wallet with id ", senderId);
         }
 
         if (sender.getBalance().compareTo(transaction.getSum()) < 0) {
-            return sender;
+            throw new WalletNotFoundException("Not enough money on wallet ", senderId);
         }
 
         Wallet receiver = repository.findById(transaction.getRecipientWalletId()).orElseThrow(() -> new WalletNotFoundException(transaction.getRecipientWalletId()));
         if (!receiver.getUser().getUsername().equals(transaction.getUsername())) {
-
-            throw new WalletNotFoundException(transaction.getRecipientWalletId());
+            throw new WalletNotFoundException(transaction.getUsername() + " doesn't have wallet with id ", transaction.getRecipientWalletId());
         }
 
         if (receiver.getCurrency() != sender.getCurrency()) {
-            throw new WalletNotFoundException(transaction.getRecipientWalletId());
+            throw new WalletNotFoundException("Wallets have incompatible currency.");
         }
 
         sender.setBalance(sender.getBalance().subtract(transaction.getSum()));
         receiver.setBalance(receiver.getBalance().add(transaction.getSum()));
 
+        System.out.println("Send " + transaction.getSum() + sender.getCurrency() + " from wallet " + sender + " to " + receiver);
         Wallet result = repository.save(sender);
         repository.save(receiver);
 

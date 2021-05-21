@@ -2,15 +2,19 @@ package ua.lviv.mel2.web_labs_back.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class TransactionDto {
     @JsonAlias("recipient-username")
+    @NotNull
     private String username;
 
     @JsonAlias("wallet-id")
+    @NotNull
     private Long recipientWalletId;
 
+    @NotNull
     private BigDecimal sum;
 
     public String getUsername() {

@@ -45,8 +45,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/built/bundle.js").permitAll()
                 .antMatchers("/api/v1/public/*").permitAll()
                 .antMatchers("/*").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/user").hasAuthority("admin")
-                .antMatchers(HttpMethod.PUT, "/api/v1/wallet/*").hasAuthority("admin")
+                .antMatchers(HttpMethod.GET, "/api/v1/user/").hasAuthority("admin")
+                .antMatchers("/api/v1/wallet").authenticated()
+                .antMatchers("/api/v1/wallet/*").authenticated()
+                //.antMatchers(HttpMethod.PUT, "/api/v1/wallet/*").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

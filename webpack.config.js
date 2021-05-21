@@ -1,15 +1,14 @@
 const path = require('path');
 
+const prod = true;
+
 module.exports = {
     entry: './src/main/js/app.js',
-    devtool: 'eval-cheap-source-map',
     cache: true,
-    mode: 'development',
     output: {
         path: __dirname,
         filename: './src/main/resources/static/built/bundle.js',
     },
-    watch: true,
     module: {
         rules: [
             {
@@ -23,3 +22,11 @@ module.exports = {
         ],
     },
 };
+
+if (prod) {
+    module.exports.mode = 'production';
+} else {
+    module.exports.mode = 'development';
+    module.exports.devtool = 'eval-cheap-source-map';
+    module.exports.watch = true;
+}

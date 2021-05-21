@@ -1,4 +1,4 @@
-import { apiUrl, debug } from './config';
+import { apiUrl } from './config';
 
 const checkStatus = (response) => {
     if (response.ok) {
@@ -8,10 +8,6 @@ const checkStatus = (response) => {
 };
 
 const request = (url, action, onError, method = 'GET', body = null, token = null) => {
-    if (debug) {
-        console.log(`Send ${method} request to ${url} with body: ${JSON.stringify(body)} and token: ${token}.`);
-    }
-
     const headers = {};
     const init = {
         method,
@@ -37,11 +33,44 @@ const request = (url, action, onError, method = 'GET', body = null, token = null
             },
             (msg) => {
                 onError(msg);
-
-                if (debug) {
-                    console.log(`Error ${msg} when send ${method} to ${url}!`);
-                }
             },
+        );
+};
+
+const transaction = (url, action, onError, body, token = null) => {
+    const method = 'post';
+    const headers = {};
+    const init = {
+        method,
+    };
+
+    if (body) {
+        headers['Content-Type'] = 'application/json;charset=utf-8';
+        init.body = JSON.stringify(body);
+    }
+
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    init.headers = headers;
+
+    fetch(apiUrl + url, init)
+        .then((response) => {
+            if (response.ok) {
+                return response;
+            }
+            if (response.status === 404) {
+                onError(response.text());
+            }
+            return Promise.reject(response.status);
+        })
+        .then((response) => response.json())
+        .then(
+            (data) => {
+                action(data);
+            },
+            () => null,
         );
 };
 
@@ -69,4 +98,5 @@ const putRequest = (url, action, onError, body, token) => {
 
 export {
     getRequest, postRequest, putRequest, deleteRequest,
+    transaction,
 };

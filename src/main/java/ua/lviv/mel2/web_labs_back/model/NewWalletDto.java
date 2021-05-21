@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import java.math.BigDecimal;
 
 public class NewWalletDto {
-    @JsonAlias("wallet-name")
+    @JsonAlias("name")
     private String walletName;
 
     private Currency currency;
