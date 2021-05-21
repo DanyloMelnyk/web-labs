@@ -32,7 +32,7 @@ function WalletCreatingPage({
 
     return (
         <main>
-            <Card title="Sign up">
+            <Card>
                 <form onSubmit={handleSubmit}>
                     <FormRow label="Wallet name: *" inputId="wallet-name"
                         onChange={(e) => setName(e.target.value)}
