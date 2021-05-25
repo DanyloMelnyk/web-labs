@@ -3,7 +3,7 @@ const path = require('path');
 const prod = true;
 
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: './src/main/js/index.js',
     cache: true,
     output: {
         path: __dirname,

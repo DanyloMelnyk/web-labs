@@ -1,4 +1,4 @@
-export const apiUrl = '/api/v1/';
+export const apiUrl = 'http://localhost:8080/';// '/api/v1/';
 export const debug = false;
 
 export const passMismatch = 'Passwords do not match!';

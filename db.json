@@ -1,0 +1,44 @@
+{
+  "user": [
+    {
+      "id": 2,
+      "username": "admin",
+      "firstName": "admin",
+      "lastName": "Lastname",
+      "email": "abc@gmail.com",
+      "phone": "7674637763",
+      "userAuthStatus": null,
+      "role": "admin",
+      "enabled": true,
+      "accountNonExpired": true,
+      "accountNonLocked": true,
+      "credentialsNonExpired": true,
+      "password": "pass",
+      "passwordConfirm": "pass"
+    },
+    {
+      "id": 8,
+      "username": "user6",
+      "firstName": "user6",
+      "lastName": "Lastname",
+      "email": "user6@gmail.com",
+      "phone": "958742623",
+      "userAuthStatus": null,
+      "role": "user",
+      "enabled": true,
+      "accountNonExpired": true,
+      "accountNonLocked": true,
+      "credentialsNonExpired": true
+    }
+  ],
+  "wallet": [
+    {
+      "id": 20,
+      "balance": "100",
+      "name": "Test 11",
+      "currency": "EUR",
+      "user_id": 2,
+      "user_name": "admin"
+    }
+  ]
+}

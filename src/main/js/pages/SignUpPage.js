@@ -91,7 +91,7 @@ function SignUpPage({
 
                     <FormRow label="Confirm password: *" inputId="password-confirm"
                         onChange={checkAndSetConfirmPass}
-                        autoComplete="new-password" id="" name="password" required
+                        autoComplete="new-password" name="password" required
                         type="password"
                         className={error === passMismatch ? 'invalid' : ''}/>
 
