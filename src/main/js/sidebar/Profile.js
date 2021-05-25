@@ -24,10 +24,10 @@ export default class Profile extends React.Component {
                 isLoaded: true,
                 user: data,
             });
-        }, (error) => {
+        }, () => {
             this.setState({
                 isLoaded: true,
-                error,
+                error: true,
             });
         }, token);
     }

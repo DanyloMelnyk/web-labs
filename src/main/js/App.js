@@ -24,9 +24,8 @@ import EditWalletPage from './pages/EditWalletPage';
 import TransactionPage from './pages/TransactionPage';
 
 const React = require('react');
-const ReactDOM = require('react-dom');
 
-function App() {
+export default function App() {
     const {
         token, setToken, role, userId,
     } = useToken();
@@ -65,10 +64,3 @@ function App() {
         </UserContext.Provider>
     );
 }
-
-ReactDOM.render(
-    (
-        <App/>
-    ),
-    document.getElementById('react'),
-);

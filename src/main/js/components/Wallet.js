@@ -39,7 +39,7 @@ Wallet.propTypes = {
     wallet: PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
-        balance: PropTypes.number,
+        balance: PropTypes.string,
         currency: PropTypes.string,
     }),
     deleteWallet: PropTypes.func.isRequired,

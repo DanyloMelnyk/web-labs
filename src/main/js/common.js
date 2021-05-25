@@ -34,7 +34,10 @@ const request = (url, action, onError, method = 'GET', body = null, token = null
             (msg) => {
                 onError(msg);
             },
-        );
+        )
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 const transaction = (url, action, onError, body, token = null) => {

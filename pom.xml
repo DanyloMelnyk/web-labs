@@ -10,7 +10,7 @@
     </parent>
     <groupId>ua.lviv.mel2</groupId>
     <artifactId>web_labs_back</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <name>web_labs_back</name>
     <description>Backend for web labs on Spring Boot</description>
     <properties>
