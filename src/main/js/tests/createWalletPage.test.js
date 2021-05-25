@@ -1,3 +1,5 @@
+import { act } from 'react-dom/test-utils';
+
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
@@ -6,7 +8,6 @@ import '@testing-library/jest-dom/extend-expect';
 
 import 'regenerator-runtime/runtime';
 import WalletCreatingPage from '../pages/WalletCreatingPage';
-import { act } from 'react-dom/test-utils';
 
 test('Test wallets page', async () => {
     global.fetch = require('node-fetch');

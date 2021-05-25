@@ -3,18 +3,19 @@ import { act } from 'react-dom/test-utils';
 
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
-import UserContext from '../UserContext';
 import '@testing-library/jest-dom/extend-expect';
-
 import 'regenerator-runtime/runtime';
 import userEvent from '@testing-library/user-event';
+
+import UserContext from '../UserContext';
 import SignUpPage from '../pages/SignUpPage';
 
 test('Test sign up', async () => {
-    global.fetch = jest.fn().mockResolvedValueOnce({
-        ok: false,
-        status: 403,
-    });
+    global.fetch = jest.fn()
+        .mockResolvedValueOnce({
+            ok: false,
+            status: 403,
+        });
 
     const {
         asFragment,

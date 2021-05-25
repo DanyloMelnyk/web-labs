@@ -1,12 +1,11 @@
 import React from 'react';
-
-import { MemoryRouter } from 'react-router';
-import UsersPage from '../pages/UsersPage';
-import UserContext from '../UserContext';
-
-import 'regenerator-runtime/runtime';
 import { render, waitFor } from '@testing-library/react';
 import { Route, Switch } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
+import 'regenerator-runtime/runtime';
+
+import UsersPage from '../pages/UsersPage';
+import UserContext from '../UserContext';
 
 test('Test user page', async () => {
     global.fetch = require('node-fetch');

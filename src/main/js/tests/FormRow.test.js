@@ -1,7 +1,7 @@
 import React from 'react';
-import FormRow from '../components/FormRow';
 import 'regenerator-runtime/runtime';
 import { render } from '@testing-library/react';
+import FormRow from '../components/FormRow';
 
 test('Simple form row test', async () => {
     const {
